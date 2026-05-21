@@ -18,7 +18,7 @@
         <div class="hero-text">
           <div class="hero-greeting">
             <span class="greeting-icon">~</span>
-            <span class="greeting-label">写作者</span>
+            <span class="greeting-label">whisper</span>
           </div>
           <h1 class="hero-name">你好，我是这里的作者</h1>
           <p class="hero-bio">
