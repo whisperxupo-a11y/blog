@@ -15,26 +15,27 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   color: var(--color-text);
-  line-height: 1.8;
+  line-height: 1.9;
   min-height: 100vh;
   background:
-    radial-gradient(ellipse at 20% 20%, rgba(107, 142, 90, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 60%, rgba(197, 118, 51, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 90%, rgba(107, 142, 90, 0.03) 0%, transparent 40%),
+    radial-gradient(ellipse at 25% 15%, rgba(90, 122, 74, 0.03) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 55%, rgba(191, 94, 43, 0.03) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 85%, rgba(90, 122, 74, 0.02) 0%, transparent 40%),
     var(--color-bg);
   position: relative;
 }
 
+/* Paper grain — subtle SVG noise overlay */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
 }
 
@@ -48,26 +49,147 @@ img {
   height: auto;
 }
 
+/* ===== Layout Containers ===== */
+
 .container {
   width: 100%;
   max-width: var(--max-width-content);
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-xl);
 }
 
 .container-wide {
   width: 100%;
   max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-xl);
 }
+
+/* Asymmetric container — content shifted slightly right */
+.container-asym {
+  width: 100%;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl) 0 calc(var(--spacing-xl) + 3rem);
+}
+
+/* ===== Sections ===== */
 
 .section-block {
   padding: var(--spacing-4xl) 0;
+  position: relative;
 }
 
 .section-block--warm {
-  background: var(--color-surface-warm);
+  background: var(--color-bg-warm);
   border-top: 1px solid var(--color-border-light);
   border-bottom: 1px solid var(--color-border-light);
+}
+
+.section-block--bleed {
+  padding: var(--spacing-4xl) 0;
+  position: relative;
+}
+
+/* ===== Diagonal accent rule ===== */
+.diagonal-accent {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.diagonal-accent::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent));
+}
+
+/* ===== Ornament line ===== */
+.ornament-line {
+  width: 48px;
+  height: 2px;
+  border-radius: 1px;
+  opacity: 0.5;
+}
+
+.ornament-line--accent {
+  background: linear-gradient(90deg, var(--color-accent-green), var(--color-accent));
+}
+
+.ornament-line--center {
+  margin: 0 auto;
+}
+
+/* ===== Organic dot ===== */
+.dot-accent {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-organic);
+  background: var(--color-accent);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.dot-green {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-organic);
+  background: var(--color-accent-green);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ===== Animations ===== */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(4deg); }
+  70% { transform: rotate(-3deg); }
+}
+
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(191, 94, 43, 0.25); }
+  50% { box-shadow: 0 0 0 12px rgba(191, 94, 43, 0); }
+}
+
+@keyframes diagonal-enter {
+  from { opacity: 0; transform: translate(-12px, 12px); }
+  to { opacity: 1; transform: translate(0, 0); }
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+  .container-asym {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .section-block,
+  .section-block--bleed {
+    padding: var(--spacing-3xl) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container,
+  .container-wide,
+  .container-asym {
+    padding: 0 var(--spacing-md);
+  }
 }

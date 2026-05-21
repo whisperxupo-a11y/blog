@@ -1,27 +1,34 @@
 <template>
   <div class="archive-page">
-    <header class="archive-header">
-      <div class="header-ornament"></div>
+    <section class="archive-hero">
+      <div class="ornament-line ornament-line--accent ornament-line--center"></div>
       <h1 class="archive-title">归档</h1>
-    </header>
-
-    <section class="section-block">
-      <PostCalendar />
+      <p class="archive-sub">按时间线浏览所有文章</p>
     </section>
 
     <section class="section-block">
-      <div v-if="loading" class="empty-state">
-        <span class="loading-pulse">~</span>
-        <p>正在翻阅...</p>
+      <div class="container">
+        <PostCalendar />
       </div>
-      <div v-else class="timeline">
-        <div v-for="post in posts" :key="post.slug" class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <time v-if="post.date" class="timeline-date">{{ formatDate(post.date) }}</time>
-            <router-link :to="'/posts/' + post.slug" class="timeline-title">
-              {{ post.title }}
-            </router-link>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        <div v-if="loading" class="empty-state">
+          <span class="loading-icon">~</span>
+          <p>正在翻阅...</p>
+        </div>
+        <div v-else class="timeline">
+          <div v-for="post in posts" :key="post.slug" class="timeline-item">
+            <div class="timeline-marker">
+              <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-card">
+              <time v-if="post.date" class="timeline-date">{{ formatDate(post.date) }}</time>
+              <router-link :to="'/posts/' + post.slug" class="timeline-title">
+                {{ post.title }}
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -51,42 +58,105 @@ onMounted(() => {
   padding: var(--spacing-3xl) 0 var(--spacing-4xl);
 }
 
-.archive-header {
+/* Hero */
+.archive-hero {
   text-align: center;
-  padding-bottom: var(--spacing-xl);
-}
-
-.header-ornament {
-  width: 44px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-accent-green), var(--color-accent), transparent);
-  border-radius: 2px;
-  margin: 0 auto var(--spacing-md);
-  opacity: 0.6;
+  padding-bottom: var(--spacing-md);
 }
 
 .archive-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--color-text);
-  position: relative;
-  display: inline-block;
+  margin-top: var(--spacing-md);
 }
 
-.archive-title::after {
+.archive-sub {
+  margin-top: var(--spacing-sm);
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--color-text-lighter);
+  font-style: italic;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: var(--spacing-2xl);
+}
+
+.timeline::before {
   content: '';
   position: absolute;
-  bottom: 2px;
-  left: -6px;
-  right: -6px;
-  height: 7px;
-  background: rgba(107, 142, 90, 0.12);
-  border-radius: 4px;
-  z-index: -1;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--color-accent-green), var(--color-border), transparent);
+  opacity: 0.4;
 }
 
+.timeline-item {
+  position: relative;
+  padding: var(--spacing-md) 0 var(--spacing-md) var(--spacing-lg);
+  animation: fade-up 0.5s ease-out both;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: calc(-1 * var(--spacing-2xl) + 7px);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-accent);
+}
+
+.timeline-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border: 1px solid var(--color-border-light);
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.timeline-card:hover {
+  border-color: var(--color-accent);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.timeline-date {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-lighter);
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.timeline-title:hover {
+  color: var(--color-accent);
+}
+
+/* Empty */
 .empty-state {
   padding: var(--spacing-3xl) 0;
   text-align: center;
@@ -98,94 +168,22 @@ onMounted(() => {
   gap: var(--spacing-sm);
 }
 
-.loading-pulse {
-  font-family: var(--font-serif);
+.loading-icon {
+  font-family: var(--font-display);
   font-size: 1.5rem;
   color: var(--color-accent);
-  animation: pulse 1.4s ease-in-out infinite;
+  animation: sway 1.4s ease-in-out infinite;
+  display: inline-block;
 }
 
-.timeline {
-  position: relative;
-  padding-left: var(--spacing-xl);
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 6px;
-  top: 4px;
-  bottom: 4px;
-  width: 1px;
-  background: linear-gradient(180deg, var(--color-border), var(--color-border-light), transparent);
-}
-
-.timeline-item {
-  position: relative;
-  padding: var(--spacing-md) 0 var(--spacing-md) var(--spacing-lg);
-  animation: fade-in 0.5s ease-out both;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: calc(-1 * var(--spacing-xl) + 6px);
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--color-surface);
-  border: 2px solid var(--color-accent);
-  z-index: 1;
-}
-
-.timeline-content {
-  background: var(--color-surface);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-md) var(--spacing-lg);
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--color-border-light);
-  transition: box-shadow 0.3s, transform 0.3s;
-}
-
-.timeline-content:hover {
-  box-shadow: var(--shadow-card-hover);
-  transform: translateX(3px);
-}
-
-.timeline-date {
-  font-size: 0.78rem;
-  color: var(--color-text-lighter);
-  letter-spacing: 0.04em;
-  display: block;
-  margin-bottom: 2px;
-}
-
-.timeline-title {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-text);
-  transition: color 0.2s;
-}
-
-.timeline-title:hover {
-  color: var(--color-accent);
-}
-
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(6deg); }
 }
 
 @media (max-width: 480px) {
   .timeline {
-    padding-left: var(--spacing-lg);
+    padding-left: var(--spacing-xl);
   }
 
   .timeline-item {

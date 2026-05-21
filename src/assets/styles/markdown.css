@@ -1,7 +1,7 @@
 .post-content {
   font-family: var(--font-serif);
   font-size: 1.1rem;
-  line-height: 2;
+  line-height: 2.1;
   color: var(--color-text);
 }
 
@@ -11,11 +11,11 @@
 .post-content h4,
 .post-content h5,
 .post-content h6 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   margin-top: var(--spacing-2xl);
   margin-bottom: var(--spacing-md);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.45;
   color: var(--color-text);
   position: relative;
 }
@@ -41,11 +41,9 @@
 
 .post-content a {
   color: var(--color-accent);
-  text-decoration: none;
-  background: linear-gradient(currentColor, currentColor) bottom / 100% 1px no-repeat;
+  background: linear-gradient(currentColor, currentColor) bottom / 0% 1px no-repeat;
   padding-bottom: 1px;
   transition: color 0.2s, background-size 0.3s;
-  background-size: 0% 1px;
 }
 
 .post-content a:hover {
@@ -65,14 +63,14 @@
 }
 
 .post-content blockquote::before {
-  content: '"';
+  content: '\201C';
   position: absolute;
-  top: -8px;
-  left: 10px;
-  font-family: var(--font-serif);
-  font-size: 2rem;
+  top: -10px;
+  left: 12px;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
   color: var(--color-accent);
-  opacity: 0.2;
+  opacity: 0.18;
   line-height: 1;
 }
 
@@ -101,7 +99,7 @@
   background: #fdf6ee;
   border-radius: 3px;
   color: var(--color-accent);
-  border: 1px solid rgba(197, 118, 51, 0.08);
+  border: 1px solid rgba(191, 94, 43, 0.08);
 }
 
 .post-content pre {
@@ -125,7 +123,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(197, 118, 51, 0.2), rgba(107, 142, 90, 0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(191, 94, 43, 0.2), rgba(90, 122, 74, 0.15), transparent);
 }
 
 .post-content pre .hljs {

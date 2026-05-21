@@ -1,7 +1,7 @@
 <template>
   <div id="app-shell">
     <SiteHeader />
-    <main class="container">
+    <main>
       <router-view />
     </main>
     <SiteFooter />
@@ -20,6 +20,5 @@ import AmbientPlayer from './components/AmbientPlayer.vue'
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 60%);
 }
 </style>

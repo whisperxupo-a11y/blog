@@ -129,9 +129,8 @@ onMounted(() => {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
-  box-shadow: var(--shadow-card);
   border: 1px solid var(--color-border-light);
-  max-width: 400px;
+  max-width: 420px;
   margin: 0 auto;
 }
 
@@ -143,7 +142,7 @@ onMounted(() => {
 }
 
 .month-label {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-text);
@@ -151,8 +150,8 @@ onMounted(() => {
 }
 
 .month-nav {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   border: 1px solid var(--color-border-light);
   background: transparent;
@@ -162,13 +161,14 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   font-family: var(--font-serif);
 }
 
 .month-nav:hover {
-  background: var(--color-surface-warm);
+  background: var(--color-bg-warm);
   color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .weekday-header {
@@ -179,16 +179,17 @@ onMounted(() => {
 
 .weekday {
   text-align: center;
-  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
   color: var(--color-text-lighter);
   padding: var(--spacing-xs) 0;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
 .date-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
+  gap: 3px;
 }
 
 .date-cell {
@@ -202,6 +203,7 @@ onMounted(() => {
 }
 
 .date-num {
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   color: var(--color-text);
 }
@@ -211,7 +213,7 @@ onMounted(() => {
 }
 
 .is-today {
-  background: rgba(197, 118, 51, 0.08);
+  background: rgba(191, 94, 43, 0.07);
 }
 
 .is-today .date-num {
@@ -236,7 +238,7 @@ onMounted(() => {
 }
 
 .date-link:hover {
-  background: rgba(107, 142, 90, 0.08);
+  background: rgba(90, 122, 74, 0.08);
 }
 
 .date-dot {

@@ -99,7 +99,7 @@ onUnmounted(() => {
   overflow: hidden;
   border-radius: var(--radius-lg);
   background: var(--color-surface);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-float);
 }
 
 .carousel-track {
@@ -125,11 +125,6 @@ onUnmounted(() => {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s ease;
-}
-
-.carousel-slide:not(:first-child .carousel-slide) .slide-image {
-  /* handled by parent transitions */
 }
 
 .slide-overlay {
@@ -137,9 +132,9 @@ onUnmounted(() => {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(61, 52, 40, 0.05) 0%,
-    transparent 40%,
-    rgba(61, 52, 40, 0.25) 100%
+    rgba(44, 36, 25, 0.04) 0%,
+    transparent 35%,
+    rgba(44, 36, 25, 0.2) 100%
   );
   pointer-events: none;
 }
@@ -155,19 +150,20 @@ onUnmounted(() => {
 }
 
 .caption-title {
-  font-family: var(--font-serif);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
   margin-bottom: var(--spacing-xs);
 }
 
 .caption-text {
+  font-family: var(--font-serif);
   font-size: 0.9rem;
-  opacity: 0.85;
+  opacity: 0.82;
   text-shadow: 0 1px 3px rgba(0,0,0,0.25);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
 .carousel-dots {
@@ -175,30 +171,29 @@ onUnmounted(() => {
   bottom: var(--spacing-lg);
   right: var(--spacing-lg);
   display: flex;
-  gap: var(--spacing-sm);
+  gap: 8px;
   z-index: 3;
 }
 
 .carousel-dot {
-  width: 28px;
-  height: 4px;
+  width: 26px;
+  height: 3px;
   border-radius: 2px;
   border: none;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.35);
   cursor: pointer;
-  transition: background 0.35s, transform 0.35s;
+  transition: background 0.3s, width 0.35s;
   padding: 0;
   backdrop-filter: blur(4px);
 }
 
 .carousel-dot:hover {
-  background: rgba(255,255,255,0.65);
-  transform: scaleY(1.6);
+  background: rgba(255,255,255,0.6);
 }
 
 .carousel-dot.active {
   background: rgba(255,255,255,0.9);
-  width: 36px;
+  width: 38px;
 }
 
 .carousel-arrow {
@@ -206,11 +201,11 @@ onUnmounted(() => {
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.72);
   backdrop-filter: blur(8px);
   cursor: pointer;
   display: flex;
@@ -218,7 +213,7 @@ onUnmounted(() => {
   justify-content: center;
   opacity: 0;
   transition: opacity 0.35s, background 0.3s, transform 0.3s;
-  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
 }
 
 .carousel:hover .carousel-arrow {
@@ -226,7 +221,7 @@ onUnmounted(() => {
 }
 
 .carousel-arrow:hover {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.92);
   transform: translateY(-50%) scale(1.08);
 }
 
@@ -239,7 +234,7 @@ onUnmounted(() => {
 }
 
 .arrow-shape {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--color-text);
   line-height: 1;
   font-family: var(--font-serif);
@@ -255,21 +250,21 @@ onUnmounted(() => {
   }
 
   .caption-title {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 
   .carousel-arrow {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
   }
 
   .carousel-dot {
-    width: 22px;
+    width: 20px;
     height: 3px;
   }
 
   .carousel-dot.active {
-    width: 28px;
+    width: 30px;
   }
 }
 </style>

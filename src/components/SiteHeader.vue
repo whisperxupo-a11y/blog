@@ -1,27 +1,25 @@
 <template>
   <header class="site-header">
-    <div class="header-inner container">
+    <div class="header-inner">
       <router-link to="/" class="site-name">
         <span class="name-icon">~</span>
         <span class="name-text">轻量级博客</span>
       </router-link>
       <nav class="header-nav">
         <router-link to="/" class="nav-link">
-          <span class="nav-dot"></span>
           文章
+          <span class="nav-indicator"></span>
         </router-link>
         <router-link to="/archive" class="nav-link">
-          <span class="nav-dot"></span>
           归档
+          <span class="nav-indicator"></span>
         </router-link>
         <router-link to="/about" class="nav-link">
-          <span class="nav-dot"></span>
           关于
+          <span class="nav-indicator"></span>
         </router-link>
       </nav>
     </div>
-    <div class="header-leaf header-leaf--left"></div>
-    <div class="header-leaf header-leaf--right"></div>
   </header>
 </template>
 
@@ -33,70 +31,80 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: linear-gradient(180deg, rgba(250, 245, 235, 0.95) 60%, rgba(250, 245, 235, 0.8) 100%);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border-bottom: 1px solid var(--color-border-light);
-  overflow: hidden;
+  background: linear-gradient(180deg, rgba(250, 248, 243, 0.94) 60%, rgba(250, 248, 243, 0.7) 100%);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
 }
 
 .header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 64px;
+  height: 68px;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.site-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
 }
 
 .name-icon {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
   color: var(--color-accent);
-  margin-right: 6px;
   display: inline-block;
-  animation: leaf-sway 4s ease-in-out infinite;
+  animation: sway 4s ease-in-out infinite;
+  line-height: 1;
 }
 
 .name-text {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   color: var(--color-text);
 }
 
 .header-nav {
   display: flex;
-  gap: var(--spacing-xl);
+  gap: 2rem;
   align-items: center;
 }
 
 .nav-link {
-  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
   color: var(--color-text-light);
-  transition: color 0.3s;
-  letter-spacing: 0.03em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 0;
+  letter-spacing: 0.04em;
+  padding: 6px 0;
   position: relative;
+  transition: color 0.3s;
 }
 
-.nav-dot {
-  width: 5px;
-  height: 5px;
-  background: var(--color-accent-green);
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0;
-  transform: scale(0);
-  transition: opacity 0.3s, transform 0.3s;
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 18px;
+  height: 1.5px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transition: transform 0.35s, width 0.35s;
 }
 
-.nav-link:hover .nav-dot,
-.nav-link.router-link-exact-active .nav-dot {
-  opacity: 1;
-  transform: scale(1);
+.nav-link:hover .nav-indicator {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.nav-link.router-link-exact-active .nav-indicator {
+  transform: translateX(-50%) scaleX(1);
+  width: 24px;
 }
 
 .nav-link:hover {
@@ -107,72 +115,10 @@
   color: var(--color-accent);
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--color-accent);
-  border-radius: 1px;
-  transform: scaleX(0);
-  transition: transform 0.3s;
-  transform-origin: right;
-}
-
-.nav-link:hover::after,
-.nav-link.router-link-exact-active::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.header-leaf {
-  position: absolute;
-  top: 0;
-  pointer-events: none;
-  opacity: 0.06;
-}
-
-.header-leaf--left {
-  left: 5%;
-  width: 80px;
-  height: 120px;
-  background:
-    radial-gradient(ellipse at 70% 30%, var(--color-accent-green) 0%, transparent 70%),
-    radial-gradient(ellipse at 30% 60%, var(--color-accent-green) 0%, transparent 70%),
-    radial-gradient(ellipse at 60% 80%, var(--color-accent) 0%, transparent 60%);
-  border-radius: 30% 70% 50% 50% / 30% 40% 60% 70%;
-  transform: rotate(-15deg);
-  animation: leaf-float 6s ease-in-out infinite;
-}
-
-.header-leaf--right {
-  right: 8%;
-  width: 60px;
-  height: 90px;
-  background:
-    radial-gradient(ellipse at 40% 20%, var(--color-accent-green) 0%, transparent 65%),
-    radial-gradient(ellipse at 60% 50%, var(--color-accent) 0%, transparent 60%);
-  border-radius: 70% 30% 40% 60% / 40% 60% 40% 60%;
-  transform: rotate(20deg);
-  animation: leaf-float 5s ease-in-out 1s infinite;
-}
-
-@keyframes leaf-sway {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(5deg); }
-  75% { transform: rotate(-3deg); }
-}
-
-@keyframes leaf-float {
-  0%, 100% { transform: translateY(0) rotate(-15deg); }
-  50% { transform: translateY(-6px) rotate(-12deg); }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .header-inner {
-    height: 56px;
+    height: 60px;
+    padding: 0 var(--spacing-md);
   }
 
   .name-text {
@@ -180,11 +126,11 @@
   }
 
   .header-nav {
-    gap: var(--spacing-md);
+    gap: 1.25rem;
   }
 
-  .header-leaf {
-    display: none;
+  .nav-link {
+    font-size: 0.8rem;
   }
 }
 </style>

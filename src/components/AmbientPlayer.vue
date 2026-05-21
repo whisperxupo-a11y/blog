@@ -68,13 +68,13 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
 }
 
 .player-panel {
-  background: rgba(254, 253, 249, 0.92);
+  background: rgba(254, 253, 251, 0.9);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   border: 1px solid var(--color-border-light);
-  box-shadow: 0 8px 32px rgba(61, 52, 40, 0.1);
+  box-shadow: 0 8px 32px rgba(44, 36, 25, 0.1);
   min-width: 240px;
   animation: panel-enter 0.35s ease-out;
 }
@@ -89,15 +89,15 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
 }
 
 .panel-icon {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 1.1rem;
   color: var(--color-accent);
-  animation: icon-sway 3s ease-in-out infinite;
+  animation: sway 3s ease-in-out infinite;
   display: inline-block;
 }
 
 .panel-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-text);
@@ -106,8 +106,9 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
 
 .panel-badge {
   margin-left: auto;
-  font-size: 0.7rem;
-  padding: 0.1em 0.5em;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  padding: 0.1em 0.55em;
   background: var(--color-accent);
   color: #fff;
   border-radius: 10px;
@@ -124,13 +125,13 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-sm);
+  padding: var(--spacing-sm);
   border-radius: var(--radius-sm);
   transition: background 0.25s;
 }
 
 .track-row.active {
-  background: rgba(107, 142, 90, 0.06);
+  background: rgba(90, 122, 74, 0.05);
 }
 
 .track-toggle {
@@ -167,6 +168,7 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
 }
 
 .track-name {
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   color: var(--color-text-light);
   letter-spacing: 0.02em;
@@ -215,10 +217,10 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
   height: 48px;
   border-radius: 50%;
   border: 1px solid var(--color-border-light);
-  background: rgba(254, 253, 249, 0.9);
+  background: rgba(254, 253, 251, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 2px 16px rgba(61, 52, 40, 0.08);
+  box-shadow: 0 2px 16px rgba(44, 36, 25, 0.08);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -228,16 +230,15 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
 
 .player-fab:hover {
   transform: scale(1.08);
-  box-shadow: 0 4px 24px rgba(61, 52, 40, 0.14);
+  box-shadow: 0 4px 24px rgba(44, 36, 25, 0.14);
 }
 
 .player-fab.breathing {
-  box-shadow: 0 0 0 0 rgba(197, 118, 51, 0.3);
   animation: breathe 2.5s ease-in-out infinite;
 }
 
 .fab-icon {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 1.3rem;
   color: var(--color-accent);
   transition: transform 0.3s;
@@ -249,7 +250,7 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
 }
 
 .player-fab.breathing .fab-icon {
-  animation: icon-sway 3s ease-in-out infinite;
+  animation: sway 3s ease-in-out infinite;
 }
 
 @keyframes panel-enter {
@@ -258,11 +259,11 @@ const { tracks, expanded, activeCount, toggle, setVolume, togglePanel } = useAmb
 }
 
 @keyframes breathe {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(197, 118, 51, 0.3); }
-  50% { box-shadow: 0 0 0 10px rgba(197, 118, 51, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(191, 94, 43, 0.3); }
+  50% { box-shadow: 0 0 0 10px rgba(191, 94, 43, 0); }
 }
 
-@keyframes icon-sway {
+@keyframes sway {
   0%, 100% { transform: rotate(0deg); }
   50% { transform: rotate(6deg); }
 }
