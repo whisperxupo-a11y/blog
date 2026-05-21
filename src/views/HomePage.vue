@@ -42,13 +42,6 @@
       <div class="hero-diagonal"></div>
     </section>
 
-    <!-- Carousel Section -->
-    <section class="section-block section-block--warm">
-      <div class="container-wide">
-        <Carousel :slides="carouselSlides" />
-      </div>
-    </section>
-
     <!-- Post List — Staggered -->
     <section class="section-block">
       <div class="container">
@@ -85,25 +78,6 @@
 import { computed, onMounted } from 'vue'
 import { usePosts } from '../composables/usePosts.js'
 import PostCard from '../components/PostCard.vue'
-import Carousel from '../components/Carousel.vue'
-
-const carouselSlides = [
-  {
-    image: 'https://picsum.photos/seed/forest-light/1200/675',
-    title: '自然之光',
-    description: '光影穿过林间，为文字注入温度'
-  },
-  {
-    image: 'https://picsum.photos/seed/mountain-culture/1200/675',
-    title: '山间岁月',
-    description: '每一座山峰都藏着一个未被讲述的故事'
-  },
-  {
-    image: 'https://picsum.photos/seed/warm-reading/1200/675',
-    title: '阅读时光',
-    description: '在纸页之间，安放思考的片刻'
-  }
-]
 
 const { posts, loading, loadAllPosts } = usePosts()
 
