@@ -3,7 +3,7 @@
     <div class="footer-line"></div>
     <div class="footer-inner">
       <div class="footer-main">
-        <span class="footer-brand">轻量级博客</span>
+        <span class="footer-brand">个人博客</span>
         <span class="footer-sep">·</span>
         <span class="footer-copy">&copy; {{ year }}</span>
       </div>

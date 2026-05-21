@@ -3,7 +3,7 @@
     <div class="header-inner">
       <router-link to="/" class="site-name">
         <span class="name-icon">~</span>
-        <span class="name-text">轻量级博客</span>
+        <span class="name-text">个人博客</span>
       </router-link>
       <nav class="header-nav">
         <router-link to="/" class="nav-link">
